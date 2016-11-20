@@ -1,0 +1,51 @@
+//
+   Created by Ronak on 11/19/2016.
+extends layout
+
+block content
+   div.container(ng-controller='quizController')
+       div.col-sm-8.col-sm-offset-2
+         h1.welcome Trivia-plaza
+       div
+         div.row.pull-right
+           a(href='/logout') Logout
+         div.row
+            div.col-sm-1.col-sm-offset-2.col-xs-1
+               button.btn.btn-success.btn-lg(type='submit' ng-class="{'vis-hidden': i === 0 || i === questionSets.length}" ng-click='prev()') < Prev
+            div.col-sm-6.col-xs-10
+              div.quiz
+                 h4.question(ng-show="i < questionSets.length") {{ questionSets[i].question }}
+                 hr
+                 div.answers(ng-show="i < questionSets.length")
+                     //did not use ng-repeat here because of difficulty using ng-value to force check previously stored answers
+                     div.form-group
+                        input(name='choice' type='radio' value='0' id='0')
+                        label(for='0') {{questionSets[i].answers[0]}}
+                     div.form-group
+                        input(name='choice' type='radio' value='1' id='1')
+                        label(for='1') {{questionSets[i].answers[1]}}
+                     div.form-group
+                        input(name='choice' type='radio' value='2' id='2')
+                        label(for='2') {{questionSets[i].answers[2]}}
+                     div.form-group
+                        input(name='choice' type='radio' value='3' id='3')
+                        label(for='3') {{questionSets[i].answers[3]}}
+                     p Question {{i+1}} of {{questionSets.length}}
+                 div.score(ng-show='i >= questionSets.length')
+                    h2 You scored {{score}} out of {{questionSets.length}}
+                    a(href='/rankings') View Your Rank
+             
+             div.col-sm-1.col-xs-1
+                   button.btn.btn-success.btn-lg(type='submit' ng-show='i < questionSets.length-1;' ng-click='next()') Next >
+
+          div.row
+              div.col-sm-2.col-sm-offset-5
+                button.btn.btn-warning.btn-lg.calculate(ng-show='i  === questionSets.length-1' ng-click='calculateScore()') Calculate
+          div.row
+              div.col-sm-4.col-sm-offset-4
+                div#error.alert.alert-danger Choose an answer!
+
+
+
+
+

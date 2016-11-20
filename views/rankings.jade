@@ -1,0 +1,23 @@
+extends layout
+a(href='/logout') Logout
+block content
+    div.row.pull-right.bg
+      a(href='/logout') Logout
+    div.col-sm-6.col-sm-offset-3
+        h1.welcome Leaderboard
+    div.container
+        div.row
+            div.col-sm-12
+        div.row
+            div.col-sm-8.col-sm-offset-2
+                table.table
+                        thead
+                            th Users
+                            th Scores
+                        tbody
+                            each val in doc
+                                tr
+                                    td= val.local.username
+                                    td.score= val.local.score
+            div.col-sm-4.col-sm-offset-4.bi
+                a(href='/quiz') Retake the quiz !
